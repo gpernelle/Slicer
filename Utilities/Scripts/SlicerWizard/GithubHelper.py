@@ -289,7 +289,7 @@ def getPullRequest(upstream, ref, user=None, fork=None, target=None):
     if user is not None and p.head.user.login != user:
       continue
 
-    if fork is not None and p.head.repo.url != fork.url:
+    if fork is not None and p.head.repo is not None and p.head.repo.url != fork.url:
       continue
 
     if target is not None and p.base.ref != target:

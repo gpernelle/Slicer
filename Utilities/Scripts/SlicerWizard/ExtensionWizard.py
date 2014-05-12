@@ -154,19 +154,19 @@ class ExtensionWizard(object):
 
     oldValue = project.getValue(name)
 
-    try:
-      url = urlparse(oldValue)
-      confirm = not url.hostname.endswith("example.com")
+    # try:
+    #   url = urlparse(oldValue)
+    #   confirm = not url.hostname.endswith("example.com")
 
-    except:
-      confirm = True
+    # except:
+    #   confirm = False
 
-    if confirm:
-      logging.info("Your extension currently uses '%s' for %s,"
-                   " which can be changed to '%s' to point to your new"
-                   " public repository." % (oldValue, name, value))
-      if not inquire("Change it"):
-        return
+    # if confirm:
+    #   logging.info("Your extension currently uses '%s' for %s,"
+    #                " which can be changed to '%s' to point to your new"
+    #                " public repository." % (oldValue, name, value))
+    #   if not inquire("Change it"):
+    #     return
 
     project.setValue(name, value)
 
@@ -426,6 +426,7 @@ class ExtensionWizard(object):
       xiUpstream = [upstreamRepo.clone_url, upstreamRepo.git_url]
       xiUpstream = getRemote(xiRepo, xiUpstream, create="upstream")
       logging.debug("index upstream remote: %s", xiUpstream.url)
+      logging.debug("fork remote remote: %s", forkedRepo.clone_url)
 
       # Check that the index repository is clean
       if xiRepo.is_dirty():
